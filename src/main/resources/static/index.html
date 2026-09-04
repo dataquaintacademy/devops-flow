@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOpsFlow | CI/CD Pipeline & Application Monitor</title>
+    <meta name="description" content="Production-ready Java Web Application (*.war) with end-to-end CI/CD Pipeline telemetry.">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-group">
+                <div class="logo-icon">🚀</div>
+                <div>
+                    <h1 class="app-title">DevOpsFlow</h1>
+                    <p class="app-subtitle">Cloud CI/CD & Service Monitoring Portal</p>
+                </div>
+            </div>
+            <div class="header-status">
+                <div class="badge badge-success pulse">
+                    <span class="dot"></span> LIVE ON APACHE TOMCAT
+                </div>
+                <div class="badge badge-outline">
+                    📦 devops-flow.war
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- CI/CD Architecture Flow Diagram Section -->
+        <section class="card pipeline-card">
+            <div class="card-header">
+                <h2>⚡ Automated CI/CD Pipeline Flow</h2>
+                <span class="caption">Orchestrated by Jenkins</span>
+            </div>
+            <div class="pipeline-flow-container" id="pipelineFlow">
+                <div class="pipeline-step active">
+                    <div class="step-icon">💻</div>
+                    <div class="step-label">1. Git</div>
+                    <div class="step-sub">Commit</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">🐙</div>
+                    <div class="step-label">2. GitHub</div>
+                    <div class="step-sub">Push Code</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">🤵</div>
+                    <div class="step-label">Jenkins</div>
+                    <div class="step-sub">Orchestrator</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">🔨</div>
+                    <div class="step-label">3. Maven</div>
+                    <div class="step-sub">Build & Test</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">📊</div>
+                    <div class="step-label">4. SonarQube</div>
+                    <div class="step-sub">Quality Gate</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">🛡️</div>
+                    <div class="step-label">5. Trivy</div>
+                    <div class="step-sub">Security Scan</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">📦</div>
+                    <div class="step-label">6. Nexus</div>
+                    <div class="step-sub">Artifact (.war)</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active">
+                    <div class="step-icon">🐱</div>
+                    <div class="step-label">7. Tomcat</div>
+                    <div class="step-sub">Deploy WAR</div>
+                </div>
+                <div class="pipeline-arrow">➔</div>
+                <div class="pipeline-step active-live">
+                    <div class="step-icon">📈</div>
+                    <div class="step-label">8. Monitor</div>
+                    <div class="step-sub">Live App</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-time Telemetry Metrics -->
+        <section class="metrics-grid">
+            <div class="card metric-card">
+                <div class="metric-title">Service Status</div>
+                <div class="metric-value text-success" id="metricStatus">HEALTHY</div>
+                <div class="metric-meta">Spring Boot 3.3.4 (Jakarta EE 10)</div>
+            </div>
+
+            <div class="card metric-card">
+                <div class="metric-title">System Uptime</div>
+                <div class="metric-value text-accent" id="metricUptime">0s</div>
+                <div class="metric-meta" id="metricJavaVer">Java 21 LTS</div>
+            </div>
+
+            <div class="card metric-card">
+                <div class="metric-title">JVM Memory Used</div>
+                <div class="metric-value text-info" id="metricMemory">-- MB</div>
+                <div class="metric-meta" id="metricMemoryTotal">Max: -- MB</div>
+            </div>
+
+            <div class="card metric-card">
+                <div class="metric-title">CI/CD Success Rate</div>
+                <div class="metric-value text-warning" id="metricSuccessRate">100%</div>
+                <div class="metric-meta" id="metricDeployCount">3 Deployments</div>
+            </div>
+        </section>
+
+        <!-- Main Content 2-Column Grid -->
+        <div class="dashboard-grid">
+            <!-- Infrastructure & Services Column -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>🖥️ Monitored DevOps Infrastructure</h2>
+                    <button class="btn btn-sm btn-outline" id="btnRefreshServices">↻ Refresh</button>
+                </div>
+                <div class="services-list" id="servicesList">
+                    <!-- Populated via JavaScript -->
+                    <div class="loading-spinner">Loading services...</div>
+                </div>
+            </section>
+
+            <!-- Deployment Log Column -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>📋 Recent CI/CD Pipeline Deployments</h2>
+                    <button class="btn btn-sm btn-primary" id="btnTriggerDeploy">+ Trigger Deploy</button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Deployment ID</th>
+                                <th>Version</th>
+                                <th>Env</th>
+                                <th>Commit</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="deploymentsTableBody">
+                            <!-- Populated via JavaScript -->
+                            <tr><td colspan="5" class="text-center">Loading deployments...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- API Links & Quick Tools -->
+        <section class="card api-card">
+            <div class="card-header">
+                <h2>🔗 Live Endpoints & DevOps Telemetry</h2>
+            </div>
+            <div class="api-links-grid">
+                <a href="/api/health" target="_blank" class="api-link-item">
+                    <span class="method">GET</span>
+                    <code>/api/health</code>
+                    <span class="desc">Real-time system telemetry and pipeline metadata</span>
+                </a>
+                <a href="/actuator/health" target="_blank" class="api-link-item">
+                    <span class="method">GET</span>
+                    <code>/actuator/health</code>
+                    <span class="desc">Spring Boot Actuator standard health probe</span>
+                </a>
+                <a href="/api/deployments" target="_blank" class="api-link-item">
+                    <span class="method">GET</span>
+                    <code>/api/deployments</code>
+                    <span class="desc">JSON list of all pipeline build & deployment records</span>
+                </a>
+                <a href="/api/services" target="_blank" class="api-link-item">
+                    <span class="method">GET</span>
+                    <code>/api/services</code>
+                    <span class="desc">Infrastructure status (Tomcat, Jenkins, Nexus, Sonar)</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>DevOps CI/CD Pipeline Demo | Maven &bull; Nexus &bull; SonarQube &bull; Trivy &bull; Tomcat &bull; Jenkins &bull; Git &bull; GitHub</p>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
