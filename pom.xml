@@ -126,12 +126,12 @@
         <repository>
             <id>nexus-releases</id>
             <name>Nexus Release Repository</name>
-            <url>${nexus.url}/maven-releases/</url>
+            <url>http://184.193.203.240:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>${nexus.url}/maven-snapshots/</url>
+            <url>http://184.193.203.240:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
